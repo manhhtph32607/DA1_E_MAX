@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1097789344460",
+    "firebase_url": "https://da1-e-max-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "da1-e-max",
+    "storage_bucket": "da1-e-max.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1097789344460:android:ae2da6381e38447e479069",
+        "android_client_info": {
+          "package_name": "com.example.da1_e_max"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGd1QvOOnkHiDfulpRdKjdtLiSNoPQRWw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
