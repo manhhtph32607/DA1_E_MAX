@@ -1,14 +1,14 @@
 {
   "project_info": {
-    "project_number": "1097789344460",
-    "firebase_url": "https://da1-e-max-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "da1-e-max",
-    "storage_bucket": "da1-e-max.appspot.com"
+    "project_number": "419280513084",
+    "firebase_url": "https://duan1-a5a45-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "duan1-a5a45",
+    "storage_bucket": "duan1-a5a45.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1097789344460:android:ae2da6381e38447e479069",
+        "mobilesdk_app_id": "1:419280513084:android:04887a021ad8bfe27afb39",
         "android_client_info": {
           "package_name": "com.example.da1_e_max"
         }
@@ -16,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAGd1QvOOnkHiDfulpRdKjdtLiSNoPQRWw"
+          "current_key": "AIzaSyAJ7bXzPYzFzktkUrJw57VqA4z5jEbfGmk"
         }
       ],
       "services": {
