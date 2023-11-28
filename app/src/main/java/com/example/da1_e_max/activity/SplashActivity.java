@@ -20,7 +20,7 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
         Handler handler = new Handler();
         back = findViewById(R.id.back);
-        Glide.with(this).load(R.drawable.filegif).into(back);
+        Glide.with(this).load(R.drawable.anhnen).into(back);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {

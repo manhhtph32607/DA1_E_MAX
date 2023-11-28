@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:src="@drawable/filegif"
+        android:src="@drawable/anhnen"
         android:scaleType="fitXY"
         android:id="@+id/back"
         android:layout_width="match_parent"
