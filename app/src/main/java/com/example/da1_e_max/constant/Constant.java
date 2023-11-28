@@ -14,7 +14,7 @@ public interface Constant {
 
 // link firebase
     String FIREBASE_URL = "https://du-an-1-f8053-default-rtdb.asia-southeast1.firebasedatabase.app";
-
+///
     String CURRENCY = " 000 VNĐ";
     int TYPE_PAYMENT_CASH = 1;
     String PAYMENT_METHOD_CASH = "Tiền mặt";
