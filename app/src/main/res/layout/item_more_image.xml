@@ -10,7 +10,7 @@
 
     <com.example.da1_e_max.widget.AspectRatioNoRadiusImageView
 
-        android:id="@+id/image_food"
+        android:id="@+id/image_product"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"

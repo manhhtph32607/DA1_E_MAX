@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ShoesShop</string>
+    <string name="app_name">E-MAX</string>
     <string name="splash_text">Cam kết cao về chất lượng sản phẩm và dịch vụ xuất sắc</string>
-    <string name="hungadmin">Nhom2Agile</string>
+    <string name="Ladmin">Nhom1_DA1</string>
 
     // Tab Menu
     <string name="home">Trang chủ</string>

@@ -19,10 +19,10 @@ import com.example.da1_e_max.activity.MainActivity;
 import com.example.da1_e_max.adapter.CartAdapter;
 import com.example.da1_e_max.constant.Constant;
 import com.example.da1_e_max.constant.GlobalFunction;
-import com.example.da1_e_max.database.FoodDatabase;
+import com.example.da1_e_max.database.ProductDatabase;
 import com.example.da1_e_max.databinding.FragmentCartBinding;
 import com.example.da1_e_max.event.ReloadListCartEvent;
-import com.example.da1_e_max.model.Food;
+import com.example.da1_e_max.model.Products;
 import com.example.da1_e_max.model.Order;
 import com.example.da1_e_max.prefs.DataStoreManager;
 import com.example.da1_e_max.utils.StringUtil;
@@ -41,7 +41,7 @@ public class CartFragment extends BaseFragment {
 
     private FragmentCartBinding mFragmentCartBinding;
     private CartAdapter mCartAdapter;
-    private List< Food > mListFoodCart;
+    private List<Products> mListProductsCart;
     private int mAmount;
 
     @Nullable
@@ -78,21 +78,21 @@ public class CartFragment extends BaseFragment {
     }
 
     private void initDataFoodCart() {
-        mListFoodCart = new ArrayList<>();
-        mListFoodCart = FoodDatabase.getInstance(getActivity()).foodDAO().getListFoodCart();
-        if (mListFoodCart == null || mListFoodCart.isEmpty()) {
+        mListProductsCart = new ArrayList<>();
+        mListProductsCart = ProductDatabase.getInstance(getActivity()).productDAO().getListFoodCart();
+        if (mListProductsCart == null || mListProductsCart.isEmpty()) {
             return;
         }
 
-        mCartAdapter = new CartAdapter(mListFoodCart, new CartAdapter.IClickListener() {
+        mCartAdapter = new CartAdapter(mListProductsCart, new CartAdapter.IClickListener() {
             @Override
-            public void clickDeteteFood(Food food, int position) {
-                deleteFoodFromCart(food, position);
+            public void clickDeteteFood(Products products, int position) {
+                deleteFoodFromCart(products, position);
             }
 
             @Override
-            public void updateItemFood(Food food, int position) {
-                FoodDatabase.getInstance(getActivity()).foodDAO().updateFood(food);
+            public void updateItemFood(Products products, int position) {
+                ProductDatabase.getInstance(getActivity()).productDAO().updateProduct(products);
                 mCartAdapter.notifyItemChanged(position);
 
                 calculateTotalPrice();
@@ -105,16 +105,16 @@ public class CartFragment extends BaseFragment {
 
     @SuppressLint("NotifyDataSetChanged")
     private void clearCart() {
-        if (mListFoodCart != null) {
-            mListFoodCart.clear();
+        if (mListProductsCart != null) {
+            mListProductsCart.clear();
         }
         mCartAdapter.notifyDataSetChanged();
         calculateTotalPrice();
     }
 
     private void calculateTotalPrice() {
-        List<Food> listFoodCart = FoodDatabase.getInstance(getActivity()).foodDAO().getListFoodCart();
-        if (listFoodCart == null || listFoodCart.isEmpty()) {
+        List<Products> listProductsCart = ProductDatabase.getInstance(getActivity()).productDAO().getListFoodCart();
+        if (listProductsCart == null || listProductsCart.isEmpty()) {
             String strZero = 0 + Constant.CURRENCY;
             mFragmentCartBinding.tvTotalPrice.setText(strZero);
             mAmount = 0;
@@ -122,8 +122,8 @@ public class CartFragment extends BaseFragment {
         }
 
         int totalPrice = 0;
-        for (Food food : listFoodCart) {
-            totalPrice = totalPrice + food.getTotalPrice();
+        for (Products products : listProductsCart) {
+            totalPrice = totalPrice + products.getTotalPrice();
         }
 
         String strTotalPrice = totalPrice + Constant.CURRENCY;
@@ -131,13 +131,13 @@ public class CartFragment extends BaseFragment {
         mAmount = totalPrice;
     }
 
-    private void deleteFoodFromCart(Food food, int position) {
+    private void deleteFoodFromCart(Products products, int position) {
         new AlertDialog.Builder(getActivity())
                 .setTitle(getString(R.string.confirm_delete_food))
                 .setMessage(getString(R.string.message_delete_food))
                 .setPositiveButton(getString(R.string.delete), (dialog, which) -> {
-                    FoodDatabase.getInstance(getActivity()).foodDAO().deleteFood(food);
-                    mListFoodCart.remove(position);
+                    ProductDatabase.getInstance(getActivity()).productDAO().deleteProduct(products);
+                    mListProductsCart.remove(position);
                     mCartAdapter.notifyItemRemoved(position);
 
                     calculateTotalPrice();
@@ -151,7 +151,7 @@ public class CartFragment extends BaseFragment {
             return;
         }
 
-        if (mListFoodCart == null || mListFoodCart.isEmpty()) {
+        if (mListProductsCart == null || mListProductsCart.isEmpty()) {
             return;
         }
 
@@ -196,7 +196,7 @@ public class CartFragment extends BaseFragment {
                             GlobalFunction.hideSoftKeyboard(getActivity());
                             bottomSheetDialog.dismiss();
 
-                            FoodDatabase.getInstance(getActivity()).foodDAO().deleteAllFood();
+                            ProductDatabase.getInstance(getActivity()).productDAO().deleteAllProduct();
                             clearCart();
                         });
             }
@@ -206,17 +206,17 @@ public class CartFragment extends BaseFragment {
     }
 
     private String getStringListFoodsOrder() {
-        if (mListFoodCart == null || mListFoodCart.isEmpty()) {
+        if (mListProductsCart == null || mListProductsCart.isEmpty()) {
             return "";
         }
         String result = "";
-        for (Food food : mListFoodCart) {
+        for (Products products : mListProductsCart) {
             if (StringUtil.isEmpty(result)) {
-                result = "- " + food.getName() + " (" + food.getRealPrice() + Constant.CURRENCY + ") "
-                        + "- " + getString(R.string.quantity) + " " + food.getCount();
+                result = "- " + products.getName() + " (" + products.getRealPrice() + Constant.CURRENCY + ") "
+                        + "- " + getString(R.string.quantity) + " " + products.getCount();
             } else {
-                result = result + "\n" + "- " + food.getName() + " (" + food.getRealPrice() + Constant.CURRENCY + ") "
-                        + "- " + getString(R.string.quantity) + " " + food.getCount();
+                result = result + "\n" + "- " + products.getName() + " (" + products.getRealPrice() + Constant.CURRENCY + ") "
+                        + "- " + getString(R.string.quantity) + " " + products.getCount();
             }
         }
         return result;

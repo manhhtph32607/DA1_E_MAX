@@ -10,7 +10,7 @@ import com.example.da1_e_max.R;
 import com.example.da1_e_max.constant.Constant;
 import com.example.da1_e_max.constant.GlobalFunction;
 import com.example.da1_e_max.databinding.ActivityAddFoodBinding;
-import com.example.da1_e_max.model.Food;
+import com.example.da1_e_max.model.Products;
 import com.example.da1_e_max.model.Image;
 import com.example.da1_e_max.model.ProductObject;
 import com.example.da1_e_max.utils.StringUtil;
@@ -24,7 +24,7 @@ public class AddProductActivity extends BaseActivity {
 
     private ActivityAddFoodBinding mActivityAddFoodBinding;
     private boolean isUpdate;
-    private Food mFood;
+    private Products mProducts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class AddProductActivity extends BaseActivity {
         Bundle bundleReceived = getIntent().getExtras();
         if (bundleReceived != null) {
             isUpdate = true;
-            mFood = (Food) bundleReceived.get(Constant.KEY_INTENT_FOOD_OBJECT);
+            mProducts = (Products) bundleReceived.get(Constant.KEY_INTENT_FOOD_OBJECT);
         }
     }
 
@@ -59,13 +59,13 @@ public class AddProductActivity extends BaseActivity {
             mActivityAddFoodBinding.toolbar.tvTitle.setText(getString(R.string.edit_food));
             mActivityAddFoodBinding.btnAddOrEdit.setText(getString(R.string.action_edit));
 
-            mActivityAddFoodBinding.edtName.setText(mFood.getName());
-            mActivityAddFoodBinding.edtDescription.setText(mFood.getDescription());
-            mActivityAddFoodBinding.edtPrice.setText(String.valueOf(mFood.getPrice()));
-            mActivityAddFoodBinding.edtDiscount.setText(String.valueOf(mFood.getSale()));
-            mActivityAddFoodBinding.edtImage.setText(mFood.getImage());
-            mActivityAddFoodBinding.edtImageBanner.setText(mFood.getBanner());
-            mActivityAddFoodBinding.chbPopular.setChecked(mFood.isPopular());
+            mActivityAddFoodBinding.edtName.setText(mProducts.getName());
+            mActivityAddFoodBinding.edtDescription.setText(mProducts.getDescription());
+            mActivityAddFoodBinding.edtPrice.setText(String.valueOf(mProducts.getPrice()));
+            mActivityAddFoodBinding.edtDiscount.setText(String.valueOf(mProducts.getSale()));
+            mActivityAddFoodBinding.edtImage.setText(mProducts.getImage());
+            mActivityAddFoodBinding.edtImageBanner.setText(mProducts.getBanner());
+            mActivityAddFoodBinding.chbPopular.setChecked(mProducts.isPopular());
             mActivityAddFoodBinding.edtOtherImage.setText(getTextOtherImages());
         } else {
             mActivityAddFoodBinding.toolbar.tvTitle.setText(getString(R.string.add_food));
@@ -75,10 +75,10 @@ public class AddProductActivity extends BaseActivity {
 
     private String getTextOtherImages() {
         String result = "";
-        if (mFood == null || mFood.getImages() == null || mFood.getImages().isEmpty()) {
+        if (mProducts == null || mProducts.getImages() == null || mProducts.getImages().isEmpty()) {
             return result;
         }
-        for (Image image : mFood.getImages()) {
+        for (Image image : mProducts.getImages()) {
             if (StringUtil.isEmpty(result)) {
                 result = result + image.getUrl();
             } else {
@@ -152,7 +152,7 @@ public class AddProductActivity extends BaseActivity {
             }
 
             ControllerApplication.get(this).getFoodDatabaseReference()
-                    .child(String.valueOf(mFood.getId())).updateChildren(map, (error, ref) -> {
+                    .child(String.valueOf(mProducts.getId())).updateChildren(map, (error, ref) -> {
                 showProgressDialog(false);
                 Toast.makeText(AddProductActivity.this,
                         getString(R.string.msg_edit_food_success), Toast.LENGTH_SHORT).show();

@@ -38,6 +38,7 @@ public class AccountFragment extends BaseFragment {
         fragmentAccountBinding.layoutSignOut.setOnClickListener(v -> onClickSignOut());
         fragmentAccountBinding.layoutChangePassword.setOnClickListener(v -> onClickChangePassword());
         fragmentAccountBinding.layoutOrderHistory.setOnClickListener(v -> onClickOrderHistory());
+
         return fragmentAccountBinding.getRoot();
     }
 

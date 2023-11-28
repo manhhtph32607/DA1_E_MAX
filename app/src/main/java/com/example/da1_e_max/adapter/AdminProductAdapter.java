@@ -11,18 +11,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.da1_e_max.constant.Constant;
 import com.example.da1_e_max.databinding.ItemAdminFoodBinding;
 import com.example.da1_e_max.listener.IOnManagerFoodListener;
-import com.example.da1_e_max.model.Food;
+import com.example.da1_e_max.model.Products;
 import com.example.da1_e_max.utils.GlideUtils;
 
 import java.util.List;
 
 public class AdminProductAdapter extends RecyclerView.Adapter<AdminProductAdapter.AdminFoodViewHolder> {
 
-    private final List < Food > mListFoods;
+    private final List <Products> mListProducts;
     public final IOnManagerFoodListener iOnManagerFoodListener;
 
-    public AdminProductAdapter(List<Food> mListFoods, IOnManagerFoodListener listener) {
-        this.mListFoods = mListFoods;
+    public AdminProductAdapter(List<Products> mListProducts, IOnManagerFoodListener listener) {
+        this.mListProducts = mListProducts;
         this.iOnManagerFoodListener = listener;
     }
 
@@ -36,46 +36,46 @@ public class AdminProductAdapter extends RecyclerView.Adapter<AdminProductAdapte
 
     @Override
     public void onBindViewHolder(@NonNull AdminFoodViewHolder holder, int position) {
-        Food food = mListFoods.get(position);
-        if (food == null) {
+        Products products = mListProducts.get(position);
+        if (products == null) {
             return;
         }
-        GlideUtils.loadUrl(food.getImage(), holder.mItemAdminFoodBinding.imgFood);
-        if (food.getSale() <= 0) {
+        GlideUtils.loadUrl(products.getImage(), holder.mItemAdminFoodBinding.imgFood);
+        if (products.getSale() <= 0) {
             holder.mItemAdminFoodBinding.tvSaleOff.setVisibility(View.GONE);
             holder.mItemAdminFoodBinding.tvPrice.setVisibility(View.GONE);
 
-            String strPrice = food.getPrice() + Constant.CURRENCY;
+            String strPrice = products.getPrice() + Constant.CURRENCY;
             holder.mItemAdminFoodBinding.tvPriceSale.setText(strPrice);
         } else {
             holder.mItemAdminFoodBinding.tvSaleOff.setVisibility(View.VISIBLE);
             holder.mItemAdminFoodBinding.tvPrice.setVisibility(View.VISIBLE);
 
-            String strSale = "Giảm " + food.getSale() + "%";
+            String strSale = "Giảm " + products.getSale() + "%";
             holder.mItemAdminFoodBinding.tvSaleOff.setText(strSale);
 
-            String strOldPrice = food.getPrice() + Constant.CURRENCY;
+            String strOldPrice = products.getPrice() + Constant.CURRENCY;
             holder.mItemAdminFoodBinding.tvPrice.setText(strOldPrice);
             holder.mItemAdminFoodBinding.tvPrice.setPaintFlags(holder.mItemAdminFoodBinding.tvPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
-            String strRealPrice = food.getRealPrice() + Constant.CURRENCY;
+            String strRealPrice = products.getRealPrice() + Constant.CURRENCY;
             holder.mItemAdminFoodBinding.tvPriceSale.setText(strRealPrice);
         }
-        holder.mItemAdminFoodBinding.tvFoodName.setText(food.getName());
-        holder.mItemAdminFoodBinding.tvFoodDescription.setText(food.getDescription());
-        if (food.isPopular()) {
+        holder.mItemAdminFoodBinding.tvFoodName.setText(products.getName());
+        holder.mItemAdminFoodBinding.tvFoodDescription.setText(products.getDescription());
+        if (products.isPopular()) {
             holder.mItemAdminFoodBinding.tvPopular.setText("Có");
         } else {
             holder.mItemAdminFoodBinding.tvPopular.setText("Không");
         }
 
-        holder.mItemAdminFoodBinding.imgEdit.setOnClickListener(v -> iOnManagerFoodListener.onClickUpdateFood(food));
-        holder.mItemAdminFoodBinding.imgDelete.setOnClickListener(v -> iOnManagerFoodListener.onClickDeleteFood(food));
+        holder.mItemAdminFoodBinding.imgEdit.setOnClickListener(v -> iOnManagerFoodListener.onClickUpdateFood(products));
+        holder.mItemAdminFoodBinding.imgDelete.setOnClickListener(v -> iOnManagerFoodListener.onClickDeleteFood(products));
     }
 
     @Override
     public int getItemCount() {
-        return null == mListFoods ? 0 : mListFoods.size();
+        return null == mListProducts ? 0 : mListProducts.size();
     }
 
     public static class AdminFoodViewHolder extends RecyclerView.ViewHolder {

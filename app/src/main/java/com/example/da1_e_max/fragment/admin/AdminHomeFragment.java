@@ -25,7 +25,7 @@ import com.example.da1_e_max.constant.GlobalFunction;
 import com.example.da1_e_max.databinding.FragmentAdminHomeBinding;
 import com.example.da1_e_max.fragment.BaseFragment;
 import com.example.da1_e_max.listener.IOnManagerFoodListener;
-import com.example.da1_e_max.model.Food;
+import com.example.da1_e_max.model.Products;
 import com.example.da1_e_max.utils.StringUtil;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -38,7 +38,7 @@ import java.util.List;
 public class AdminHomeFragment extends BaseFragment {
 
     private FragmentAdminHomeBinding mFragmentAdminHomeBinding;
-    private List< Food > mListFood;
+    private List<Products> mListProducts;
     private AdminProductAdapter mAdminProductAdapter;
 
     @Nullable
@@ -65,16 +65,16 @@ public class AdminHomeFragment extends BaseFragment {
         }
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         mFragmentAdminHomeBinding.rcvFood.setLayoutManager(linearLayoutManager);
-        mListFood = new ArrayList<>();
-        mAdminProductAdapter = new AdminProductAdapter(mListFood, new IOnManagerFoodListener() {
+        mListProducts = new ArrayList<>();
+        mAdminProductAdapter = new AdminProductAdapter(mListProducts, new IOnManagerFoodListener() {
             @Override
-            public void onClickUpdateFood(Food food) {
-                onClickEditFood(food);
+            public void onClickUpdateFood(Products products) {
+                onClickEditFood(products);
             }
 
             @Override
-            public void onClickDeleteFood(Food food) {
-                deleteFoodItem(food);
+            public void onClickDeleteFood(Products products) {
+                deleteFoodItem(products);
             }
         });
         mFragmentAdminHomeBinding.rcvFood.setAdapter(mAdminProductAdapter);
@@ -116,13 +116,13 @@ public class AdminHomeFragment extends BaseFragment {
         GlobalFunction.startActivity(getActivity(), AddProductActivity.class);
     }
 
-    private void onClickEditFood(Food food) {
+    private void onClickEditFood(Products products) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(Constant.KEY_INTENT_FOOD_OBJECT, food);
+        bundle.putSerializable(Constant.KEY_INTENT_FOOD_OBJECT, products);
         GlobalFunction.startActivity(getActivity(), AddProductActivity.class, bundle);
     }
 
-    private void deleteFoodItem(Food food) {
+    private void deleteFoodItem(Products products) {
         new AlertDialog.Builder(getActivity())
                 .setTitle(getString(R.string.msg_delete_title))
                 .setMessage(getString(R.string.msg_confirm_delete))
@@ -131,7 +131,7 @@ public class AdminHomeFragment extends BaseFragment {
                         return;
                     }
                     ControllerApplication.get(getActivity()).getFoodDatabaseReference()
-                            .child(String.valueOf(food.getId())).removeValue((error, ref) ->
+                            .child(String.valueOf(products.getId())).removeValue((error, ref) ->
                             Toast.makeText(getActivity(),
                                     getString(R.string.msg_delete_movie_successfully), Toast.LENGTH_SHORT).show());
                 })
@@ -141,10 +141,10 @@ public class AdminHomeFragment extends BaseFragment {
 
     private void searchFood() {
         String strKey = mFragmentAdminHomeBinding.edtSearchName.getText().toString().trim();
-        if (mListFood != null) {
-            mListFood.clear();
+        if (mListProducts != null) {
+            mListProducts.clear();
         } else {
-            mListFood = new ArrayList<>();
+            mListProducts = new ArrayList<>();
         }
         getListFood(strKey);
         GlobalFunction.hideSoftKeyboard(getActivity());
@@ -159,16 +159,16 @@ public class AdminHomeFragment extends BaseFragment {
                     @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
-                        Food food = dataSnapshot.getValue(Food.class);
-                        if (food == null || mListFood == null || mAdminProductAdapter == null) {
+                        Products products = dataSnapshot.getValue(Products.class);
+                        if (products == null || mListProducts == null || mAdminProductAdapter == null) {
                             return;
                         }
                         if (StringUtil.isEmpty(keyword)) {
-                            mListFood.add(0, food);
+                            mListProducts.add(0, products);
                         } else {
-                            if (GlobalFunction.getTextSearch(food.getName()).toLowerCase().trim()
+                            if (GlobalFunction.getTextSearch(products.getName()).toLowerCase().trim()
                                     .contains(GlobalFunction.getTextSearch(keyword).toLowerCase().trim())) {
-                                mListFood.add(0, food);
+                                mListProducts.add(0, products);
                             }
                         }
                         mAdminProductAdapter.notifyDataSetChanged();
@@ -177,14 +177,14 @@ public class AdminHomeFragment extends BaseFragment {
                     @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String s) {
-                        Food food = dataSnapshot.getValue(Food.class);
-                        if (food == null || mListFood == null
-                                || mListFood.isEmpty() || mAdminProductAdapter == null) {
+                        Products products = dataSnapshot.getValue(Products.class);
+                        if (products == null || mListProducts == null
+                                || mListProducts.isEmpty() || mAdminProductAdapter == null) {
                             return;
                         }
-                        for (int i = 0; i < mListFood.size(); i++) {
-                            if (food.getId() == mListFood.get(i).getId()) {
-                                mListFood.set(i, food);
+                        for (int i = 0; i < mListProducts.size(); i++) {
+                            if (products.getId() == mListProducts.get(i).getId()) {
+                                mListProducts.set(i, products);
                                 break;
                             }
                         }
@@ -194,14 +194,14 @@ public class AdminHomeFragment extends BaseFragment {
                     @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                        Food food = dataSnapshot.getValue(Food.class);
-                        if (food == null || mListFood == null
-                                || mListFood.isEmpty() || mAdminProductAdapter == null) {
+                        Products products = dataSnapshot.getValue(Products.class);
+                        if (products == null || mListProducts == null
+                                || mListProducts.isEmpty() || mAdminProductAdapter == null) {
                             return;
                         }
-                        for (Food foodObject : mListFood) {
-                            if (food.getId() == foodObject.getId()) {
-                                mListFood.remove(foodObject);
+                        for (Products productsObject : mListProducts) {
+                            if (products.getId() == productsObject.getId()) {
+                                mListProducts.remove(productsObject);
                                 break;
                             }
                         }

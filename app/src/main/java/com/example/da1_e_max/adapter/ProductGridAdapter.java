@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.da1_e_max.constant.Constant;
 import com.example.da1_e_max.databinding.ItemFoodGridBinding;
 import com.example.da1_e_max.listener.IOnClickFoodItemListener;
-import com.example.da1_e_max.model.Food;
+import com.example.da1_e_max.model.Products;
 import com.example.da1_e_max.utils.GlideUtils;
 
 import java.util.List;
@@ -19,11 +19,11 @@ import java.util.List;
 
 public class ProductGridAdapter extends RecyclerView.Adapter<ProductGridAdapter.FoodGridViewHolder> {
 
-    private final List < Food > mListFoods;
+    private final List <Products> mListProducts;
     public final IOnClickFoodItemListener iOnClickFoodItemListener;
 
-    public ProductGridAdapter(List<Food> mListFoods, IOnClickFoodItemListener iOnClickFoodItemListener) {
-        this.mListFoods = mListFoods;
+    public ProductGridAdapter(List<Products> mListProducts, IOnClickFoodItemListener iOnClickFoodItemListener) {
+        this.mListProducts = mListProducts;
         this.iOnClickFoodItemListener = iOnClickFoodItemListener;
     }
 
@@ -36,39 +36,39 @@ public class ProductGridAdapter extends RecyclerView.Adapter<ProductGridAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull FoodGridViewHolder holder, int position) {
-        Food food = mListFoods.get(position);
-        if (food == null) {
+        Products products = mListProducts.get(position);
+        if (products == null) {
             return;
         }
-        GlideUtils.loadUrl(food.getImage(), holder.mItemFoodGridBinding.imgFood);
-        if (food.getSale() <= 0) {
+        GlideUtils.loadUrl(products.getImage(), holder.mItemFoodGridBinding.imgFood);
+        if (products.getSale() <= 0) {
             holder.mItemFoodGridBinding.tvSaleOff.setVisibility(View.GONE);
             holder.mItemFoodGridBinding.tvPrice.setVisibility(View.GONE);
 
-            String strPrice = food.getPrice() + Constant.CURRENCY;
+            String strPrice = products.getPrice() + Constant.CURRENCY;
             holder.mItemFoodGridBinding.tvPriceSale.setText(strPrice);
         } else {
             holder.mItemFoodGridBinding.tvSaleOff.setVisibility(View.VISIBLE);
             holder.mItemFoodGridBinding.tvPrice.setVisibility(View.VISIBLE);
 
-            String strSale = "Giảm " + food.getSale() + "%";
+            String strSale = "Giảm " + products.getSale() + "%";
             holder.mItemFoodGridBinding.tvSaleOff.setText(strSale);
 
-            String strOldPrice = food.getPrice() + Constant.CURRENCY;
+            String strOldPrice = products.getPrice() + Constant.CURRENCY;
             holder.mItemFoodGridBinding.tvPrice.setText(strOldPrice);
             holder.mItemFoodGridBinding.tvPrice.setPaintFlags(holder.mItemFoodGridBinding.tvPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
-            String strRealPrice = food.getRealPrice() + Constant.CURRENCY;
+            String strRealPrice = products.getRealPrice() + Constant.CURRENCY;
             holder.mItemFoodGridBinding.tvPriceSale.setText(strRealPrice);
         }
-        holder.mItemFoodGridBinding.tvFoodName.setText(food.getName());
+        holder.mItemFoodGridBinding.tvFoodName.setText(products.getName());
 
-        holder.mItemFoodGridBinding.layoutItem.setOnClickListener(v -> iOnClickFoodItemListener.onClickItemFood(food));
+        holder.mItemFoodGridBinding.layoutItem.setOnClickListener(v -> iOnClickFoodItemListener.onClickItemFood(products));
     }
 
     @Override
     public int getItemCount() {
-        return null == mListFoods ? 0 : mListFoods.size();
+        return null == mListProducts ? 0 : mListProducts.size();
     }
 
     public static class FoodGridViewHolder extends RecyclerView.ViewHolder {

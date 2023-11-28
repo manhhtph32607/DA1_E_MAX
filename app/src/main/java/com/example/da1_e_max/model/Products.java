@@ -7,8 +7,8 @@ import androidx.room.PrimaryKey;
 import java.io.Serializable;
 import java.util.List;
 
-@Entity(tableName = "food")
-public class Food implements Serializable {
+@Entity(tableName = "products")
+public class Products implements Serializable {
 
     @PrimaryKey
     private long id;

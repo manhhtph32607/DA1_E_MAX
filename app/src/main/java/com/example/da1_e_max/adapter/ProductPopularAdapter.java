@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.da1_e_max.databinding.ItemFoodPopularBinding;
 import com.example.da1_e_max.listener.IOnClickFoodItemListener;
-import com.example.da1_e_max.model.Food;
+import com.example.da1_e_max.model.Products;
 import com.example.da1_e_max.utils.GlideUtils;
 
 import java.util.List;
@@ -17,11 +17,11 @@ import java.util.List;
 
 public class ProductPopularAdapter extends RecyclerView.Adapter<ProductPopularAdapter.FoodPopularViewHolder> {
 
-    private final List < Food > mListFoods;
+    private final List <Products> mListProducts;
     public final IOnClickFoodItemListener iOnClickFoodItemListener;
 
-    public ProductPopularAdapter(List<Food> mListFoods, IOnClickFoodItemListener iOnClickFoodItemListener) {
-        this.mListFoods = mListFoods;
+    public ProductPopularAdapter(List<Products> mListProducts, IOnClickFoodItemListener iOnClickFoodItemListener) {
+        this.mListProducts = mListProducts;
         this.iOnClickFoodItemListener = iOnClickFoodItemListener;
     }
 
@@ -34,25 +34,25 @@ public class ProductPopularAdapter extends RecyclerView.Adapter<ProductPopularAd
 
     @Override
     public void onBindViewHolder(@NonNull FoodPopularViewHolder holder, int position) {
-        Food food = mListFoods.get(position);
-        if (food == null) {
+        Products products = mListProducts.get(position);
+        if (products == null) {
             return;
         }
-        GlideUtils.loadUrlBanner(food.getBanner(), holder.mItemFoodPopularBinding.imageFood);
-        if (food.getSale() <= 0) {
+        GlideUtils.loadUrlBanner(products.getBanner(), holder.mItemFoodPopularBinding.imageFood);
+        if (products.getSale() <= 0) {
             holder.mItemFoodPopularBinding.tvSaleOff.setVisibility(View.GONE);
         } else {
             holder.mItemFoodPopularBinding.tvSaleOff.setVisibility(View.VISIBLE);
-            String strSale = "Giảm " + food.getSale() + "%";
+            String strSale = "Giảm " + products.getSale() + "%";
             holder.mItemFoodPopularBinding.tvSaleOff.setText(strSale);
         }
-        holder.mItemFoodPopularBinding.layoutItem.setOnClickListener(v -> iOnClickFoodItemListener.onClickItemFood(food));
+        holder.mItemFoodPopularBinding.layoutItem.setOnClickListener(v -> iOnClickFoodItemListener.onClickItemFood(products));
     }
 
     @Override
     public int getItemCount() {
-        if (mListFoods != null) {
-            return mListFoods.size();
+        if (mListProducts != null) {
+            return mListProducts.size();
         }
         return 0;
     }

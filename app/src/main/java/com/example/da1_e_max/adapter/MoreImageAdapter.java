@@ -34,7 +34,7 @@ public class MoreImageAdapter extends RecyclerView.Adapter<MoreImageAdapter.More
         if (image == null) {
             return;
         }
-        GlideUtils.loadUrl(image.getUrl(), holder.mItemMoreImageBinding.imageFood);
+        GlideUtils.loadUrl(image.getUrl(), holder.mItemMoreImageBinding.imageProduct);
     }
 
     @Override

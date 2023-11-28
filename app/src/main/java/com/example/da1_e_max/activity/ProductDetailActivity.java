@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import com.example.da1_e_max.R;
 import com.example.da1_e_max.adapter.MoreImageAdapter;
 import com.example.da1_e_max.constant.Constant;
-import com.example.da1_e_max.database.FoodDatabase;
+import com.example.da1_e_max.database.ProductDatabase;
 import com.example.da1_e_max.databinding.ActivityFoodDetailBinding;
 import com.example.da1_e_max.event.ReloadListCartEvent;
-import com.example.da1_e_max.model.Food;
+import com.example.da1_e_max.model.Products;
 import com.example.da1_e_max.utils.GlideUtils;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
@@ -27,7 +27,7 @@ import java.util.List;
 public class ProductDetailActivity extends BaseActivity {
 
     private ActivityFoodDetailBinding mActivityFoodDetailBinding;
-    private Food mFood;
+    private Products mProducts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class ProductDetailActivity extends BaseActivity {
     private void getDataIntent() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            mFood = (Food) bundle.get(Constant.KEY_INTENT_FOOD_OBJECT);
+            mProducts = (Products) bundle.get(Constant.KEY_INTENT_FOOD_OBJECT);
         }
     }
 
@@ -56,33 +56,33 @@ public class ProductDetailActivity extends BaseActivity {
     }
 
     private void setDataFoodDetail() {
-        if (mFood == null) {
+        if (mProducts == null) {
             return;
         }
 
-        GlideUtils.loadUrlBanner(mFood.getBanner(),mActivityFoodDetailBinding.imageFood);
-        if (mFood.getSale() <= 0) {
+        GlideUtils.loadUrlBanner(mProducts.getBanner(),mActivityFoodDetailBinding.imageFood);
+        if (mProducts.getSale() <= 0) {
             mActivityFoodDetailBinding.tvSaleOff.setVisibility(View.GONE);
             mActivityFoodDetailBinding.tvPrice.setVisibility(View.GONE);
 
-            String strPrice = mFood.getPrice() + Constant.CURRENCY;
+            String strPrice = mProducts.getPrice() + Constant.CURRENCY;
             mActivityFoodDetailBinding.tvPriceSale.setText(strPrice);
         } else {
             mActivityFoodDetailBinding.tvSaleOff.setVisibility(View.VISIBLE);
             mActivityFoodDetailBinding.tvPrice.setVisibility(View.VISIBLE);
 
-            String strSale = "Giảm " + mFood.getSale() + "%";
+            String strSale = "Giảm " + mProducts.getSale() + "%";
             mActivityFoodDetailBinding.tvSaleOff.setText(strSale);
 
-            String strPriceOld = mFood.getPrice() + Constant.CURRENCY;
+            String strPriceOld = mProducts.getPrice() + Constant.CURRENCY;
             mActivityFoodDetailBinding.tvPrice.setText(strPriceOld);
             mActivityFoodDetailBinding.tvPrice.setPaintFlags(mActivityFoodDetailBinding.tvPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
-            String strRealPrice = mFood.getRealPrice() + Constant.CURRENCY;
+            String strRealPrice = mProducts.getRealPrice() + Constant.CURRENCY;
             mActivityFoodDetailBinding.tvPriceSale.setText(strRealPrice);
         }
-        mActivityFoodDetailBinding.tvFoodName.setText(mFood.getName());
-        mActivityFoodDetailBinding.tvFoodDescription.setText(mFood.getDescription());
+        mActivityFoodDetailBinding.tvFoodName.setText(mProducts.getName());
+        mActivityFoodDetailBinding.tvFoodDescription.setText(mProducts.getDescription());
 
         displayListMoreImages();
 
@@ -90,7 +90,7 @@ public class ProductDetailActivity extends BaseActivity {
     }
 
     private void displayListMoreImages() {
-        if (mFood.getImages() == null || mFood.getImages().isEmpty()) {
+        if (mProducts.getImages() == null || mProducts.getImages().isEmpty()) {
             mActivityFoodDetailBinding.tvMoreImageLabel.setVisibility(View.GONE);
             return;
         }
@@ -98,7 +98,7 @@ public class ProductDetailActivity extends BaseActivity {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         mActivityFoodDetailBinding.rcvImages.setLayoutManager(gridLayoutManager);
 
-        MoreImageAdapter moreImageAdapter = new MoreImageAdapter(mFood.getImages());
+        MoreImageAdapter moreImageAdapter = new MoreImageAdapter(mProducts.getImages());
         mActivityFoodDetailBinding.rcvImages.setAdapter(moreImageAdapter);
     }
 
@@ -117,7 +117,7 @@ public class ProductDetailActivity extends BaseActivity {
     }
 
     private boolean isFoodInCart() {
-        List<Food> list = FoodDatabase.getInstance(this).foodDAO().checkFoodInCart(mFood.getId());
+        List<Products> list = ProductDatabase.getInstance(this).productDAO().checkProductInCart(mProducts.getId());
         return list != null && !list.isEmpty();
     }
 
@@ -145,15 +145,15 @@ public class ProductDetailActivity extends BaseActivity {
         TextView tvCancel = viewDialog.findViewById(R.id.tv_cancel);
         TextView tvAddCart = viewDialog.findViewById(R.id.tv_add_cart);
 
-        GlideUtils.loadUrl(mFood.getImage(), imgFoodCart);
-        tvFoodNameCart.setText(mFood.getName());
+        GlideUtils.loadUrl(mProducts.getImage(), imgFoodCart);
+        tvFoodNameCart.setText(mProducts.getName());
 
-        int totalPrice = mFood.getRealPrice();
+        int totalPrice = mProducts.getRealPrice();
         String strTotalPrice = totalPrice + Constant.CURRENCY;
         tvFoodPriceCart.setText(strTotalPrice);
 
-        mFood.setCount(1);
-        mFood.setTotalPrice(totalPrice);
+        mProducts.setCount(1);
+        mProducts.setTotalPrice(totalPrice);
 
         tvSubtractCount.setOnClickListener(v -> {
             int count = Integer.parseInt(tvCount.getText().toString());
@@ -163,30 +163,30 @@ public class ProductDetailActivity extends BaseActivity {
             int newCount = Integer.parseInt(tvCount.getText().toString()) - 1;
             tvCount.setText(String.valueOf(newCount));
 
-            int totalPrice1 = mFood.getRealPrice() * newCount;
+            int totalPrice1 = mProducts.getRealPrice() * newCount;
             String strTotalPrice1 = totalPrice1 + Constant.CURRENCY;
             tvFoodPriceCart.setText(strTotalPrice1);
 
-            mFood.setCount(newCount);
-            mFood.setTotalPrice(totalPrice1);
+            mProducts.setCount(newCount);
+            mProducts.setTotalPrice(totalPrice1);
         });
 
         tvAddCount.setOnClickListener(v -> {
             int newCount = Integer.parseInt(tvCount.getText().toString()) + 1;
             tvCount.setText(String.valueOf(newCount));
 
-            int totalPrice2 = mFood.getRealPrice() * newCount;
+            int totalPrice2 = mProducts.getRealPrice() * newCount;
             String strTotalPrice2 = totalPrice2 + Constant.CURRENCY;
             tvFoodPriceCart.setText(strTotalPrice2);
 
-            mFood.setCount(newCount);
-            mFood.setTotalPrice(totalPrice2);
+            mProducts.setCount(newCount);
+            mProducts.setTotalPrice(totalPrice2);
         });
 
         tvCancel.setOnClickListener(v -> bottomSheetDialog.dismiss());
 
         tvAddCart.setOnClickListener(v -> {
-            FoodDatabase.getInstance(ProductDetailActivity.this).foodDAO().insertFood(mFood);
+            ProductDatabase.getInstance(ProductDetailActivity.this).productDAO().insertProduct(mProducts);
             bottomSheetDialog.dismiss();
             setStatusButtonAddToCart();
             EventBus.getDefault().post(new ReloadListCartEvent());

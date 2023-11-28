@@ -1,7 +1,7 @@
 package com.example.da1_e_max.listener;
 
-import com.example.da1_e_max.model.Food;
+import com.example.da1_e_max.model.Products;
 
 public interface IOnClickFoodItemListener {
-    void onClickItemFood(Food food);
+    void onClickItemFood(Products products);
 }
