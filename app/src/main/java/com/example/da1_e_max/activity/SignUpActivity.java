@@ -1,6 +1,7 @@
 package com.example.da1_e_max.activity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.da1_e_max.R;
@@ -25,7 +26,7 @@ public class SignUpActivity extends BaseActivity {
         setContentView(mActivitySignUpBinding.getRoot());
 
         mActivitySignUpBinding.rdbUser.setChecked(true);
-
+        mActivitySignUpBinding.rdbUser.setVisibility(View.GONE);
         mActivitySignUpBinding.imgBack.setOnClickListener(v -> onBackPressed());
         mActivitySignUpBinding.layoutSignIn.setOnClickListener(v -> finish());
         mActivitySignUpBinding.btnSignUp.setOnClickListener(v -> onClickValidateSignUp());
@@ -41,15 +42,6 @@ public class SignUpActivity extends BaseActivity {
         } else if (!StringUtil.isValidEmail(strEmail)) {
             Toast.makeText(SignUpActivity.this, getString(R.string.msg_email_invalid), Toast.LENGTH_SHORT).show();
         } else {
-//            if (mActivitySignUpBinding.rdbAdmin.isChecked()) {
-//                if (!strEmail.contains(Constant.ADMIN_EMAIL_FORMAT)) {
-//                    Toast.makeText(SignUpActivity.this, getString(R.string.msg_email_invalid_admin), Toast.LENGTH_SHORT).show();
-//                } else {
-//                    signUpUser(strEmail, strPassword);
-//                }
-//                return;
-//            }
-
             if (strEmail.contains(Constant.ADMIN_EMAIL_FORMAT)) {
                 Toast.makeText(SignUpActivity.this, getString(R.string.msg_email_invalid_user), Toast.LENGTH_SHORT).show();
             } else {

@@ -1,12 +1,15 @@
 package com.example.da1_e_max.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,10 +19,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.da1_e_max.ControllerApplication;
 import com.example.da1_e_max.R;
 import com.example.da1_e_max.activity.MainActivity;
+import com.example.da1_e_max.activity.SignInActivity;
 import com.example.da1_e_max.adapter.CartAdapter;
 import com.example.da1_e_max.constant.Constant;
 import com.example.da1_e_max.constant.GlobalFunction;
 import com.example.da1_e_max.database.ProductDatabase;
+import com.example.da1_e_max.databinding.FragmentAccountBinding;
 import com.example.da1_e_max.databinding.FragmentCartBinding;
 import com.example.da1_e_max.event.ReloadListCartEvent;
 import com.example.da1_e_max.model.Products;
@@ -29,7 +34,7 @@ import com.example.da1_e_max.prefs.DataStoreManager;
 import com.example.da1_e_max.utils.StringUtil;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-
+import com.example.da1_e_max.fragment.AccountFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -41,6 +46,7 @@ import java.util.List;
 public class CartFragment extends BaseFragment {
 
     private FragmentCartBinding mFragmentCartBinding;
+    private FragmentAccountBinding mfragmentAccountBinding;
     private CartAdapter mCartAdapter;
     private List<Products> mListProductsCart;
     private int mAmount;
@@ -50,12 +56,19 @@ public class CartFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mFragmentCartBinding = FragmentCartBinding.inflate(inflater, container, false);
-
+        mfragmentAccountBinding = FragmentAccountBinding.inflate(inflater,container,false);
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }
         displayListFoodInCart();
-        mFragmentCartBinding.tvOrderCart.setOnClickListener(v -> onClickOrderCart());
+//        String strCheck = mfragmentAccountBinding.tvEmail.getText().toString();
+        String strCheck = DataStoreManager.getUser().getEmail();
+        if (StringUtil.isEmpty(strCheck)){
+            mFragmentCartBinding.tvOrderCart.setOnClickListener(v -> onClickOderCartv1());
+        }else {
+            mFragmentCartBinding.tvOrderCart.setOnClickListener(v -> onClickOrderCart());
+        }
+
 
         return mFragmentCartBinding.getRoot();
     }
@@ -147,7 +160,11 @@ public class CartFragment extends BaseFragment {
                 .setNegativeButton(getString(R.string.dialog_cancel), (dialog, which) -> dialog.dismiss())
                 .show();
     }
-
+    //////////////
+    public  void    onClickOderCartv1(){
+        Intent intent = new Intent(getActivity(), SignInActivity.class);
+        startActivity(intent);
+    }
     public void onClickOrderCart() {
         User user   = new User();
 //       user= ProductDatabase.getInstance(getActivity()).

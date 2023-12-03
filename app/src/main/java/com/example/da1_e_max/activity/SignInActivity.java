@@ -1,6 +1,7 @@
 package com.example.da1_e_max.activity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.da1_e_max.R;
@@ -25,6 +26,8 @@ public class SignInActivity extends BaseActivity {
 
         mActivitySignInBinding.rdbUser.setChecked(true);
 
+        mActivitySignInBinding.rdbAdmin.setVisibility(View.GONE);
+        mActivitySignInBinding.rdbUser.setVisibility(View.GONE);
         mActivitySignInBinding.layoutSignUp.setOnClickListener(
                 v -> GlobalFunction.startActivity(SignInActivity.this, SignUpActivity.class));
 
@@ -39,6 +42,7 @@ public class SignInActivity extends BaseActivity {
     private void onClickValidateSignIn() {
         String strEmail = mActivitySignInBinding.edtEmail.getText().toString().trim();
         String strPassword = mActivitySignInBinding.edtPassword.getText().toString().trim();
+
         if (StringUtil.isEmpty(strEmail)) {
             Toast.makeText(SignInActivity.this, getString(R.string.msg_email_require), Toast.LENGTH_SHORT).show();
         } else if (StringUtil.isEmpty(strPassword)) {
@@ -46,23 +50,10 @@ public class SignInActivity extends BaseActivity {
         } else if (!StringUtil.isValidEmail(strEmail)) {
             Toast.makeText(SignInActivity.this, getString(R.string.msg_email_invalid), Toast.LENGTH_SHORT).show();
         } else {
-            if (mActivitySignInBinding.rdbAdmin.isChecked()) {
-                if (!strEmail.contains(Constant.ADMIN_EMAIL_FORMAT)) {
-                    Toast.makeText(SignInActivity.this, getString(R.string.msg_email_invalid_admin), Toast.LENGTH_SHORT).show();
-                } else {
-                    signInUser(strEmail, strPassword);
-                }
-                return;
-            }
-
-            if (strEmail.contains(Constant.ADMIN_EMAIL_FORMAT)) {
-                Toast.makeText(SignInActivity.this, getString(R.string.msg_email_invalid_user), Toast.LENGTH_SHORT).show();
-            } else {
                 signInUser(strEmail, strPassword);
             }
-        }
+
     }
-//
     private void signInUser(String email, String password) {
         showProgressDialog(true);
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();

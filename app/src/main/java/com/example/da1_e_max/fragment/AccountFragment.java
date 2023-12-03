@@ -40,6 +40,8 @@ public class AccountFragment extends BaseFragment {
         if ( StringUtil.isEmpty(Strcheck)){
             fragmentAccountBinding.layoutSignIn.setVisibility(View.VISIBLE);
             fragmentAccountBinding.layoutSignOut.setVisibility(View.GONE);
+            fragmentAccountBinding.layoutOrderHistory.setVisibility(View.GONE);
+            fragmentAccountBinding.layoutChangePassword.setVisibility(View.GONE);
         }else {
             fragmentAccountBinding.layoutSignIn.setVisibility(View.GONE);
             fragmentAccountBinding.layoutSignOut.setVisibility(View.VISIBLE);
