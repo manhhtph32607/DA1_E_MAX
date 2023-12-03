@@ -71,6 +71,7 @@ public class AccountFragment extends BaseFragment {
     }
     private void onClickSignup(){
         Intent intent = new Intent(getActivity(), SignUpActivity.class);
+
         startActivity(intent);
     }
 

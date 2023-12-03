@@ -182,11 +182,14 @@ public class CartFragment extends BaseFragment {
             String strPhone = edtPhoneOrder.getText().toString().trim();
             String strAddress = edtAddressOrder.getText().toString().trim();
 
-            if (StringUtil.isEmpty(strName) || StringUtil.isEmpty(strPhone) || StringUtil.isEmpty(strAddress)) {
+
+            if (StringUtil.isEmpty(strName.trim().matches("[a-zA-Z ]+")+"") || (StringUtil.isEmpty(strPhone.matches("\\d{10}")+""))|| StringUtil.isEmpty(strAddress)) {
+
                 GlobalFunction.showToastMessage(getActivity(), getString(R.string.message_enter_infor_order));
             } else {
                 long id = System.currentTimeMillis();
                 String strEmail = DataStoreManager.getUser().getEmail();
+
                 Order order = new Order(id, strName, strEmail, strPhone, strAddress,
                         mAmount, getStringListFoodsOrder(), Constant.TYPE_PAYMENT_CASH, false);
                 ControllerApplication.get(getActivity()).getBookingDatabaseReference()
