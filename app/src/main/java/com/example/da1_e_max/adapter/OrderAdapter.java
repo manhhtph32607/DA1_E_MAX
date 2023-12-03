@@ -49,7 +49,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         holder.mItemOrderBinding.tvName.setText(order.getName());
         holder.mItemOrderBinding.tvPhone.setText(order.getPhone());
         holder.mItemOrderBinding.tvAddress.setText(order.getAddress());
-        holder.mItemOrderBinding.tvMenu.setText(order.getFoods());
+        holder.mItemOrderBinding.tvMenu.setText(order.getProducts());
         holder.mItemOrderBinding.tvDate.setText(DateTimeUtils.convertTimeStampToDate(order.getId()));
 
         String strAmount = order.getAmount() + Constant.CURRENCY;

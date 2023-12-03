@@ -62,7 +62,7 @@ public class SignInActivity extends BaseActivity {
             }
         }
     }
-
+//
     private void signInUser(String email, String password) {
         showProgressDialog(true);
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();

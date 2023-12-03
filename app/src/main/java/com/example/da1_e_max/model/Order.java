@@ -10,7 +10,7 @@ public class Order implements Serializable {
     private String phone;
     private String address;
     private int amount;
-    private String foods;
+    private String products;
     private int payment;
     private boolean completed;
 
@@ -25,7 +25,7 @@ public class Order implements Serializable {
         this.phone = phone;
         this.address = address;
         this.amount = amount;
-        this.foods = foods;
+        this.products = foods;
         this.payment = payment;
         this.completed = completed;
     }
@@ -78,12 +78,12 @@ public class Order implements Serializable {
         this.amount = amount;
     }
 
-    public String getFoods() {
-        return foods;
+    public String getProducts() {
+        return products;
     }
 
-    public void setFoods(String foods) {
-        this.foods = foods;
+    public void setProducts(String foods) {
+        this.products = foods;
     }
 
     public int getPayment() {

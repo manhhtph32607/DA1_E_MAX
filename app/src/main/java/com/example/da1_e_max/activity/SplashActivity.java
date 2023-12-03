@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.example.da1_e_max.R;
 
-
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends BaseActivity {
     ImageView back;

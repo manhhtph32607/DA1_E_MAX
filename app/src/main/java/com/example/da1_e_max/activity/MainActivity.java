@@ -9,12 +9,13 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.da1_e_max.R;
 import com.example.da1_e_max.adapter.MainViewPagerAdapter;
 import com.example.da1_e_max.databinding.ActivityMainBinding;
+import com.example.da1_e_max.model.User;
 
 
 public class MainActivity extends BaseActivity {
 
     private ActivityMainBinding mActivityMainBinding;
-
+    private User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -21,5 +21,5 @@ public interface Constant {
     String ADMIN_EMAIL_FORMAT = "@admin.com";
 
     // Key Intent
-    String KEY_INTENT_FOOD_OBJECT = "food_object";
+    String KEY_INTENT_PRODUCT_OBJECT = "product_object";
 }

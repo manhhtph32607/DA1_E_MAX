@@ -18,7 +18,8 @@ public interface ProductDAO {
     void insertProduct(Products products);
 
     @Query("SELECT * FROM Products")
-    List <Products> getListFoodCart();
+    List <Products> getListProductCart();
+
 
     @Query("SELECT * FROM Products WHERE id=:id")
     List<Products> checkProductInCart(long id);

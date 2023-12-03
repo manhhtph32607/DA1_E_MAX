@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.da1_e_max.databinding.ItemFoodPopularBinding;
+import com.example.da1_e_max.databinding.ItemProductPopularBinding;
 import com.example.da1_e_max.listener.IOnClickFoodItemListener;
 import com.example.da1_e_max.model.Products;
 import com.example.da1_e_max.utils.GlideUtils;
@@ -28,7 +28,7 @@ public class ProductPopularAdapter extends RecyclerView.Adapter<ProductPopularAd
     @NonNull
     @Override
     public FoodPopularViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemFoodPopularBinding itemFoodPopularBinding = ItemFoodPopularBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        ItemProductPopularBinding itemFoodPopularBinding = ItemProductPopularBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new FoodPopularViewHolder(itemFoodPopularBinding);
     }
 
@@ -59,9 +59,9 @@ public class ProductPopularAdapter extends RecyclerView.Adapter<ProductPopularAd
 
     public static class FoodPopularViewHolder extends RecyclerView.ViewHolder {
 
-        private final ItemFoodPopularBinding mItemFoodPopularBinding;
+        private final ItemProductPopularBinding mItemFoodPopularBinding;
 
-        public FoodPopularViewHolder(@NonNull ItemFoodPopularBinding itemFoodPopularBinding) {
+        public FoodPopularViewHolder(@NonNull ItemProductPopularBinding itemFoodPopularBinding) {
             super(itemFoodPopularBinding.getRoot());
             this.mItemFoodPopularBinding = itemFoodPopularBinding;
         }

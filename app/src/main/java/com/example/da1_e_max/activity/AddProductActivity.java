@@ -43,7 +43,7 @@ public class AddProductActivity extends BaseActivity {
         Bundle bundleReceived = getIntent().getExtras();
         if (bundleReceived != null) {
             isUpdate = true;
-            mProducts = (Products) bundleReceived.get(Constant.KEY_INTENT_FOOD_OBJECT);
+            mProducts = (Products) bundleReceived.get(Constant.KEY_INTENT_PRODUCT_OBJECT);
         }
     }
 
@@ -58,7 +58,6 @@ public class AddProductActivity extends BaseActivity {
         if (isUpdate) {
             mActivityAddFoodBinding.toolbar.tvTitle.setText(getString(R.string.edit_food));
             mActivityAddFoodBinding.btnAddOrEdit.setText(getString(R.string.action_edit));
-
             mActivityAddFoodBinding.edtName.setText(mProducts.getName());
             mActivityAddFoodBinding.edtDescription.setText(mProducts.getDescription());
             mActivityAddFoodBinding.edtPrice.setText(String.valueOf(mProducts.getPrice()));

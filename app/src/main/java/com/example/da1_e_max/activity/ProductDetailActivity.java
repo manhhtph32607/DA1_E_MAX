@@ -44,7 +44,7 @@ public class ProductDetailActivity extends BaseActivity {
     private void getDataIntent() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            mProducts = (Products) bundle.get(Constant.KEY_INTENT_FOOD_OBJECT);
+            mProducts = (Products) bundle.get(Constant.KEY_INTENT_PRODUCT_OBJECT);
         }
     }
 

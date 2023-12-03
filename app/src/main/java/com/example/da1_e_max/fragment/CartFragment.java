@@ -24,6 +24,7 @@ import com.example.da1_e_max.databinding.FragmentCartBinding;
 import com.example.da1_e_max.event.ReloadListCartEvent;
 import com.example.da1_e_max.model.Products;
 import com.example.da1_e_max.model.Order;
+import com.example.da1_e_max.model.User;
 import com.example.da1_e_max.prefs.DataStoreManager;
 import com.example.da1_e_max.utils.StringUtil;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -43,6 +44,7 @@ public class CartFragment extends BaseFragment {
     private CartAdapter mCartAdapter;
     private List<Products> mListProductsCart;
     private int mAmount;
+    private List<User> listUser;
 
     @Nullable
     @Override
@@ -74,12 +76,12 @@ public class CartFragment extends BaseFragment {
         DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
         mFragmentCartBinding.rcvFoodCart.addItemDecoration(itemDecoration);
 
-        initDataFoodCart();
+        initDataProductCart();
     }
 
-    private void initDataFoodCart() {
+    private void initDataProductCart() {
         mListProductsCart = new ArrayList<>();
-        mListProductsCart = ProductDatabase.getInstance(getActivity()).productDAO().getListFoodCart();
+        mListProductsCart = ProductDatabase.getInstance(getActivity()).productDAO().getListProductCart();
         if (mListProductsCart == null || mListProductsCart.isEmpty()) {
             return;
         }
@@ -113,7 +115,7 @@ public class CartFragment extends BaseFragment {
     }
 
     private void calculateTotalPrice() {
-        List<Products> listProductsCart = ProductDatabase.getInstance(getActivity()).productDAO().getListFoodCart();
+        List<Products> listProductsCart = ProductDatabase.getInstance(getActivity()).productDAO().getListProductCart();
         if (listProductsCart == null || listProductsCart.isEmpty()) {
             String strZero = 0 + Constant.CURRENCY;
             mFragmentCartBinding.tvTotalPrice.setText(strZero);
@@ -133,8 +135,8 @@ public class CartFragment extends BaseFragment {
 
     private void deleteFoodFromCart(Products products, int position) {
         new AlertDialog.Builder(getActivity())
-                .setTitle(getString(R.string.confirm_delete_food))
-                .setMessage(getString(R.string.message_delete_food))
+                .setTitle(getString(R.string.confirm_delete_product))
+                .setMessage(getString(R.string.message_delete_product))
                 .setPositiveButton(getString(R.string.delete), (dialog, which) -> {
                     ProductDatabase.getInstance(getActivity()).productDAO().deleteProduct(products);
                     mListProductsCart.remove(position);
@@ -147,6 +149,8 @@ public class CartFragment extends BaseFragment {
     }
 
     public void onClickOrderCart() {
+        User user   = new User();
+//       user= ProductDatabase.getInstance(getActivity()).
         if (getActivity() == null) {
             return;
         }

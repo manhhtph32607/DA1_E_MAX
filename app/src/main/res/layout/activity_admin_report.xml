@@ -39,7 +39,6 @@
                     android:id="@+id/tv_date_from"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:background="@drawable/bg_white_corner_6_border_gray"
                     android:padding="@dimen/define_dimen_12"
                     android:textColor="@color/textColorPrimary"

@@ -1,6 +1,7 @@
 package com.example.da1_e_max.fragment;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +24,7 @@ import com.example.da1_e_max.constant.GlobalFunction;
 import com.example.da1_e_max.databinding.FragmentAccountBinding;
 import com.example.da1_e_max.model.User;
 import com.example.da1_e_max.prefs.DataStoreManager;
+import com.example.da1_e_max.utils.StringUtil;
 import com.google.firebase.auth.FirebaseAuth;
 
 
@@ -32,12 +35,20 @@ public class AccountFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentAccountBinding fragmentAccountBinding = FragmentAccountBinding.inflate(inflater, container, false);
-        fragmentAccountBinding.btndn.setOnClickListener(v ->  onClickLogin());
-        fragmentAccountBinding.btndk.setOnClickListener(v -> onClickSignup());
         fragmentAccountBinding.tvEmail.setText(DataStoreManager.getUser().getEmail());
+        String Strcheck = fragmentAccountBinding.tvEmail.getText().toString();
+        if ( StringUtil.isEmpty(Strcheck)){
+            fragmentAccountBinding.layoutSignIn.setVisibility(View.VISIBLE);
+            fragmentAccountBinding.layoutSignOut.setVisibility(View.GONE);
+        }else {
+            fragmentAccountBinding.layoutSignIn.setVisibility(View.GONE);
+            fragmentAccountBinding.layoutSignOut.setVisibility(View.VISIBLE);
+        }
         fragmentAccountBinding.layoutSignOut.setOnClickListener(v -> onClickSignOut());
+        fragmentAccountBinding.layoutSignIn.setOnClickListener(v ->onClickLogin() );
         fragmentAccountBinding.layoutChangePassword.setOnClickListener(v -> onClickChangePassword());
         fragmentAccountBinding.layoutOrderHistory.setOnClickListener(v -> onClickOrderHistory());
+
 
         return fragmentAccountBinding.getRoot();
     }
@@ -56,18 +67,11 @@ public class AccountFragment extends BaseFragment {
     private void onClickChangePassword() {
         GlobalFunction.startActivity(getActivity(), ChangePasswordActivity.class);
     }
-    private void settt(@Nullable User user){
-        if(user != null){
-            btndk.setVisibility(View.VISIBLE);
-            btndn.setVisibility(View.VISIBLE);
-        }else{
-            btndk.setVisibility(View.VISIBLE);
-            btndn.setVisibility(View.VISIBLE);
-        }
-    }
     private void onClickLogin(){
         Intent intent = new Intent(getActivity(), SignInActivity.class);
         startActivity(intent);
+
+
     }
     private void onClickSignup(){
         Intent intent = new Intent(getActivity(), SignUpActivity.class);

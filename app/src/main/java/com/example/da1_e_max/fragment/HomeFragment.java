@@ -185,7 +185,7 @@ public class HomeFragment extends BaseFragment {
 
     private void goToFoodDetail(@NonNull Products products) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(Constant.KEY_INTENT_FOOD_OBJECT, products);
+        bundle.putSerializable(Constant.KEY_INTENT_PRODUCT_OBJECT, products);
         GlobalFunction.startActivity(getActivity(), ProductDetailActivity.class, bundle);
     }
 

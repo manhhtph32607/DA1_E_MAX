@@ -29,22 +29,6 @@
                 android:textSize="@dimen/text_size_normal"
                 android:textStyle="bold" />
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/btndn"
-                android:text="Đăng nhập"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <Button
-                android:width="105dp"
-                android:id="@+id/btndk"
-                android:text="Đăng kí"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
     </LinearLayout>
 
     <View
@@ -137,4 +121,26 @@
             android:textSize="@dimen/text_size_small" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/layout_sign_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/define_dimen_10"
+        android:paddingBottom="@dimen/define_dimen_10">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_sign_in" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/define_dimen_10"
+            android:text="@string/sign_in"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_small" />
+    </LinearLayout>
 </LinearLayout>

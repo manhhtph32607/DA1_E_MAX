@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.da1_e_max.constant.Constant;
-import com.example.da1_e_max.databinding.ItemFoodGridBinding;
+import com.example.da1_e_max.databinding.ItemProductGridBinding;
 import com.example.da1_e_max.listener.IOnClickFoodItemListener;
 import com.example.da1_e_max.model.Products;
 import com.example.da1_e_max.utils.GlideUtils;
@@ -30,7 +30,7 @@ public class ProductGridAdapter extends RecyclerView.Adapter<ProductGridAdapter.
     @NonNull
     @Override
     public FoodGridViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemFoodGridBinding itemFoodGridBinding = ItemFoodGridBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        ItemProductGridBinding itemFoodGridBinding = ItemProductGridBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new FoodGridViewHolder(itemFoodGridBinding);
     }
 
@@ -73,9 +73,9 @@ public class ProductGridAdapter extends RecyclerView.Adapter<ProductGridAdapter.
 
     public static class FoodGridViewHolder extends RecyclerView.ViewHolder {
 
-        private final ItemFoodGridBinding mItemFoodGridBinding;
+        private final ItemProductGridBinding mItemFoodGridBinding;
 
-        public FoodGridViewHolder(ItemFoodGridBinding itemFoodGridBinding) {
+        public FoodGridViewHolder(ItemProductGridBinding itemFoodGridBinding) {
             super(itemFoodGridBinding.getRoot());
             this.mItemFoodGridBinding = itemFoodGridBinding;
         }

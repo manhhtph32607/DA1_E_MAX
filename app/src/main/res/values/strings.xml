@@ -37,8 +37,8 @@
     <string name="order_cart">Đặt Hàng</string>
     <string name="total">Tổng Tiền:</string>
     <string name="delete">Xóa</string>
-    <string name="confirm_delete_food">Xác nhận xóa khỏi giỏ hàng</string>
-    <string name="message_delete_food">Bạn có chắc chắn muốn xóa món ăn này không?</string>
+    <string name="confirm_delete_product">Xác nhận xóa khỏi giỏ hàng</string>
+    <string name="message_delete_product">Bạn có chắc chắn muốn xóa món ăn này không?</string>
     <string name="dialog_cancel">Hủy</string>
     <string name="order_detail">Chi tiết đơn hàng</string>
     <string name="address_delivery">Địa chỉ giao hàng</string>
