@@ -14,7 +14,8 @@ import com.example.da1_e_max.R;
 import com.example.da1_e_max.adapter.MoreImageAdapter;
 import com.example.da1_e_max.constant.Constant;
 import com.example.da1_e_max.database.ProductDatabase;
-import com.example.da1_e_max.databinding.ActivityFoodDetailBinding;
+import com.example.da1_e_max.databinding.ActivityAddProductBinding;
+import com.example.da1_e_max.databinding.ActivityProductDetailBinding;
 import com.example.da1_e_max.event.ReloadListCartEvent;
 import com.example.da1_e_max.model.Products;
 import com.example.da1_e_max.utils.GlideUtils;
@@ -26,13 +27,13 @@ import java.util.List;
 
 public class ProductDetailActivity extends BaseActivity {
 
-    private ActivityFoodDetailBinding mActivityFoodDetailBinding;
+    private ActivityProductDetailBinding mActivityFoodDetailBinding;
     private Products mProducts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mActivityFoodDetailBinding = ActivityFoodDetailBinding.inflate(getLayoutInflater());
+        mActivityFoodDetailBinding = ActivityProductDetailBinding.inflate(getLayoutInflater());
         setContentView(mActivityFoodDetailBinding.getRoot());
 
         getDataIntent();

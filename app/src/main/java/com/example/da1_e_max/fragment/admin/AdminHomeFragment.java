@@ -24,7 +24,7 @@ import com.example.da1_e_max.constant.Constant;
 import com.example.da1_e_max.constant.GlobalFunction;
 import com.example.da1_e_max.databinding.FragmentAdminHomeBinding;
 import com.example.da1_e_max.fragment.BaseFragment;
-import com.example.da1_e_max.listener.IOnManagerFoodListener;
+import com.example.da1_e_max.listener.IOnManagerProductListener;
 import com.example.da1_e_max.model.Products;
 import com.example.da1_e_max.utils.StringUtil;
 import com.google.firebase.database.ChildEventListener;
@@ -66,14 +66,14 @@ public class AdminHomeFragment extends BaseFragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         mFragmentAdminHomeBinding.rcvFood.setLayoutManager(linearLayoutManager);
         mListProducts = new ArrayList<>();
-        mAdminProductAdapter = new AdminProductAdapter(mListProducts, new IOnManagerFoodListener() {
+        mAdminProductAdapter = new AdminProductAdapter(mListProducts, new IOnManagerProductListener() {
             @Override
-            public void onClickUpdateFood(Products products) {
+            public void onClickUpdateProduct(Products products) {
                 onClickEditFood(products);
             }
 
             @Override
-            public void onClickDeleteFood(Products products) {
+            public void onClickDeleteProduct(Products products) {
                 deleteFoodItem(products);
             }
         });

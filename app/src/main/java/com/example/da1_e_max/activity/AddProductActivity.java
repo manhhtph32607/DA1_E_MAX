@@ -9,7 +9,7 @@ import com.example.da1_e_max.ControllerApplication;
 import com.example.da1_e_max.R;
 import com.example.da1_e_max.constant.Constant;
 import com.example.da1_e_max.constant.GlobalFunction;
-import com.example.da1_e_max.databinding.ActivityAddFoodBinding;
+import com.example.da1_e_max.databinding.ActivityAddProductBinding;
 import com.example.da1_e_max.model.Products;
 import com.example.da1_e_max.model.Image;
 import com.example.da1_e_max.model.ProductObject;
@@ -22,14 +22,14 @@ import java.util.Map;
 
 public class AddProductActivity extends BaseActivity {
 
-    private ActivityAddFoodBinding mActivityAddFoodBinding;
+    private ActivityAddProductBinding mActivityAddFoodBinding;
     private boolean isUpdate;
     private Products mProducts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mActivityAddFoodBinding = ActivityAddFoodBinding.inflate(getLayoutInflater());
+        mActivityAddFoodBinding = ActivityAddProductBinding.inflate(getLayoutInflater());
         setContentView(mActivityAddFoodBinding.getRoot());
 
         getDataIntent();

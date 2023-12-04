@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.da1_e_max.constant.Constant;
 import com.example.da1_e_max.databinding.ItemProductGridBinding;
-import com.example.da1_e_max.listener.IOnClickFoodItemListener;
+import com.example.da1_e_max.listener.IOnClickProductItemListener;
 import com.example.da1_e_max.model.Products;
 import com.example.da1_e_max.utils.GlideUtils;
 
@@ -20,11 +20,11 @@ import java.util.List;
 public class ProductGridAdapter extends RecyclerView.Adapter<ProductGridAdapter.FoodGridViewHolder> {
 
     private final List <Products> mListProducts;
-    public final IOnClickFoodItemListener iOnClickFoodItemListener;
+    public final IOnClickProductItemListener iOnClickProductItemListener;
 
-    public ProductGridAdapter(List<Products> mListProducts, IOnClickFoodItemListener iOnClickFoodItemListener) {
+    public ProductGridAdapter(List<Products> mListProducts, IOnClickProductItemListener iOnClickProductItemListener) {
         this.mListProducts = mListProducts;
-        this.iOnClickFoodItemListener = iOnClickFoodItemListener;
+        this.iOnClickProductItemListener = iOnClickProductItemListener;
     }
 
     @NonNull
@@ -63,7 +63,7 @@ public class ProductGridAdapter extends RecyclerView.Adapter<ProductGridAdapter.
         }
         holder.mItemFoodGridBinding.tvFoodName.setText(products.getName());
 
-        holder.mItemFoodGridBinding.layoutItem.setOnClickListener(v -> iOnClickFoodItemListener.onClickItemFood(products));
+        holder.mItemFoodGridBinding.layoutItem.setOnClickListener(v -> iOnClickProductItemListener.onClickItemProduct(products));
     }
 
     @Override

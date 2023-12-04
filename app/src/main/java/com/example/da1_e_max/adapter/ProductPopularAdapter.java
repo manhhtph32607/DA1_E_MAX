@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.da1_e_max.databinding.ItemProductPopularBinding;
-import com.example.da1_e_max.listener.IOnClickFoodItemListener;
+import com.example.da1_e_max.listener.IOnClickProductItemListener;
 import com.example.da1_e_max.model.Products;
 import com.example.da1_e_max.utils.GlideUtils;
 
@@ -18,11 +18,11 @@ import java.util.List;
 public class ProductPopularAdapter extends RecyclerView.Adapter<ProductPopularAdapter.FoodPopularViewHolder> {
 
     private final List <Products> mListProducts;
-    public final IOnClickFoodItemListener iOnClickFoodItemListener;
+    public final IOnClickProductItemListener iOnClickProductItemListener;
 
-    public ProductPopularAdapter(List<Products> mListProducts, IOnClickFoodItemListener iOnClickFoodItemListener) {
+    public ProductPopularAdapter(List<Products> mListProducts, IOnClickProductItemListener iOnClickProductItemListener) {
         this.mListProducts = mListProducts;
-        this.iOnClickFoodItemListener = iOnClickFoodItemListener;
+        this.iOnClickProductItemListener = iOnClickProductItemListener;
     }
 
     @NonNull
@@ -46,7 +46,7 @@ public class ProductPopularAdapter extends RecyclerView.Adapter<ProductPopularAd
             String strSale = "Giảm " + products.getSale() + "%";
             holder.mItemFoodPopularBinding.tvSaleOff.setText(strSale);
         }
-        holder.mItemFoodPopularBinding.layoutItem.setOnClickListener(v -> iOnClickFoodItemListener.onClickItemFood(products));
+        holder.mItemFoodPopularBinding.layoutItem.setOnClickListener(v -> iOnClickProductItemListener.onClickItemProduct(products));
     }
 
     @Override

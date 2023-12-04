@@ -9,8 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.da1_e_max.constant.Constant;
-import com.example.da1_e_max.databinding.ItemAdminFoodBinding;
-import com.example.da1_e_max.listener.IOnManagerFoodListener;
+import com.example.da1_e_max.databinding.ItemAdminProductBinding;
+import com.example.da1_e_max.listener.IOnManagerProductListener;
 import com.example.da1_e_max.model.Products;
 import com.example.da1_e_max.utils.GlideUtils;
 
@@ -19,17 +19,17 @@ import java.util.List;
 public class AdminProductAdapter extends RecyclerView.Adapter<AdminProductAdapter.AdminFoodViewHolder> {
 
     private final List <Products> mListProducts;
-    public final IOnManagerFoodListener iOnManagerFoodListener;
+    public final IOnManagerProductListener iOnManagerProductListener;
 
-    public AdminProductAdapter(List<Products> mListProducts, IOnManagerFoodListener listener) {
+    public AdminProductAdapter(List<Products> mListProducts, IOnManagerProductListener listener) {
         this.mListProducts = mListProducts;
-        this.iOnManagerFoodListener = listener;
+        this.iOnManagerProductListener = listener;
     }
 
     @NonNull
     @Override
     public AdminFoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemAdminFoodBinding itemAdminFoodBinding = ItemAdminFoodBinding
+        ItemAdminProductBinding itemAdminFoodBinding = ItemAdminProductBinding
                 .inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new AdminFoodViewHolder(itemAdminFoodBinding);
     }
@@ -69,8 +69,8 @@ public class AdminProductAdapter extends RecyclerView.Adapter<AdminProductAdapte
             holder.mItemAdminFoodBinding.tvPopular.setText("Không");
         }
 
-        holder.mItemAdminFoodBinding.imgEdit.setOnClickListener(v -> iOnManagerFoodListener.onClickUpdateFood(products));
-        holder.mItemAdminFoodBinding.imgDelete.setOnClickListener(v -> iOnManagerFoodListener.onClickDeleteFood(products));
+        holder.mItemAdminFoodBinding.imgEdit.setOnClickListener(v -> iOnManagerProductListener.onClickUpdateProduct(products));
+        holder.mItemAdminFoodBinding.imgDelete.setOnClickListener(v -> iOnManagerProductListener.onClickDeleteProduct(products));
     }
 
     @Override
@@ -80,9 +80,9 @@ public class AdminProductAdapter extends RecyclerView.Adapter<AdminProductAdapte
 
     public static class AdminFoodViewHolder extends RecyclerView.ViewHolder {
 
-        private final ItemAdminFoodBinding mItemAdminFoodBinding;
+        private final ItemAdminProductBinding mItemAdminFoodBinding;
 
-        public AdminFoodViewHolder(ItemAdminFoodBinding itemAdminFoodBinding) {
+        public AdminFoodViewHolder(ItemAdminProductBinding itemAdminFoodBinding) {
             super(itemAdminFoodBinding.getRoot());
             this.mItemAdminFoodBinding = itemAdminFoodBinding;
         }
