@@ -25,8 +25,8 @@ public class SignUpActivity extends BaseActivity {
         mActivitySignUpBinding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(mActivitySignUpBinding.getRoot());
 
-        mActivitySignUpBinding.rdbUser.setChecked(true);
-        mActivitySignUpBinding.rdbUser.setVisibility(View.GONE);
+//        mActivitySignUpBinding.rdbUser.setChecked(true);
+//        mActivitySignUpBinding.rdbUser.setVisibility(View.GONE);
         mActivitySignUpBinding.imgBack.setOnClickListener(v -> onBackPressed());
         mActivitySignUpBinding.layoutSignIn.setOnClickListener(v -> finish());
         mActivitySignUpBinding.btnSignUp.setOnClickListener(v -> onClickValidateSignUp());
