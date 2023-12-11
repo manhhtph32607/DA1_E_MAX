@@ -139,7 +139,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:text="@string/percent"
-                    android:textColor="@color/purple"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/text_size_small" />
             </RelativeLayout>
 
@@ -233,7 +233,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/define_dimen_20"
-                android:background="@drawable/bg_main_corner_8"
+                android:background="@color/bottomTabActive"
                 android:text="@string/action_add"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_small" />

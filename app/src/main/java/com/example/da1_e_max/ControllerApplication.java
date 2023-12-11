@@ -26,7 +26,7 @@ public class ControllerApplication extends Application {
         DataStoreManager.init(getApplicationContext());
     }
 
-    public DatabaseReference getFoodDatabaseReference() {
+    public DatabaseReference getProductDatabaseReference() {
         return mFirebaseDatabase.getReference("/products");
     }
 

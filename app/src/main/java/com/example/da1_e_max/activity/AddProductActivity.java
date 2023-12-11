@@ -150,7 +150,7 @@ public class AddProductActivity extends BaseActivity {
                 map.put("images", listImages);
             }
 
-            ControllerApplication.get(this).getFoodDatabaseReference()
+            ControllerApplication.get(this).getProductDatabaseReference()
                     .child(String.valueOf(mProducts.getId())).updateChildren(map, (error, ref) -> {
                 showProgressDialog(false);
                 Toast.makeText(AddProductActivity.this,
@@ -168,7 +168,7 @@ public class AddProductActivity extends BaseActivity {
         if (!listImages.isEmpty()) {
             food.setImages(listImages);
         }
-        ControllerApplication.get(this).getFoodDatabaseReference()
+        ControllerApplication.get(this).getProductDatabaseReference()
                 .child(String.valueOf(foodId)).setValue(food, (error, ref) -> {
             showProgressDialog(false);
             mActivityAddFoodBinding.edtName.setText("");

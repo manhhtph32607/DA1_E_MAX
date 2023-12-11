@@ -16,7 +16,7 @@ import com.example.da1_e_max.utils.GlideUtils;
 
 import java.util.List;
 
-public class AdminProductAdapter extends RecyclerView.Adapter<AdminProductAdapter.AdminFoodViewHolder> {
+public class AdminProductAdapter extends RecyclerView.Adapter<AdminProductAdapter.AdminProductViewHolder> {
 
     private final List <Products> mListProducts;
     public final IOnManagerProductListener iOnManagerProductListener;
@@ -28,49 +28,49 @@ public class AdminProductAdapter extends RecyclerView.Adapter<AdminProductAdapte
 
     @NonNull
     @Override
-    public AdminFoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemAdminProductBinding itemAdminFoodBinding = ItemAdminProductBinding
+    public AdminProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ItemAdminProductBinding itemAdminProductBinding = ItemAdminProductBinding
                 .inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new AdminFoodViewHolder(itemAdminFoodBinding);
+        return new AdminProductViewHolder(itemAdminProductBinding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdminFoodViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AdminProductViewHolder holder, int position) {
         Products products = mListProducts.get(position);
         if (products == null) {
             return;
         }
-        GlideUtils.loadUrl(products.getImage(), holder.mItemAdminFoodBinding.imgFood);
+        GlideUtils.loadUrl(products.getImage(), holder.mItemAdminProductBinding.imgFood);
         if (products.getSale() <= 0) {
-            holder.mItemAdminFoodBinding.tvSaleOff.setVisibility(View.GONE);
-            holder.mItemAdminFoodBinding.tvPrice.setVisibility(View.GONE);
+            holder.mItemAdminProductBinding.tvSaleOff.setVisibility(View.GONE);
+            holder.mItemAdminProductBinding.tvPrice.setVisibility(View.GONE);
 
             String strPrice = products.getPrice() + Constant.CURRENCY;
-            holder.mItemAdminFoodBinding.tvPriceSale.setText(strPrice);
+            holder.mItemAdminProductBinding.tvPriceSale.setText(strPrice);
         } else {
-            holder.mItemAdminFoodBinding.tvSaleOff.setVisibility(View.VISIBLE);
-            holder.mItemAdminFoodBinding.tvPrice.setVisibility(View.VISIBLE);
+            holder.mItemAdminProductBinding.tvSaleOff.setVisibility(View.VISIBLE);
+            holder.mItemAdminProductBinding.tvPrice.setVisibility(View.VISIBLE);
 
             String strSale = "Giảm " + products.getSale() + "%";
-            holder.mItemAdminFoodBinding.tvSaleOff.setText(strSale);
+            holder.mItemAdminProductBinding.tvSaleOff.setText(strSale);
 
             String strOldPrice = products.getPrice() + Constant.CURRENCY;
-            holder.mItemAdminFoodBinding.tvPrice.setText(strOldPrice);
-            holder.mItemAdminFoodBinding.tvPrice.setPaintFlags(holder.mItemAdminFoodBinding.tvPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            holder.mItemAdminProductBinding.tvPrice.setText(strOldPrice);
+            holder.mItemAdminProductBinding.tvPrice.setPaintFlags(holder.mItemAdminProductBinding.tvPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
             String strRealPrice = products.getRealPrice() + Constant.CURRENCY;
-            holder.mItemAdminFoodBinding.tvPriceSale.setText(strRealPrice);
+            holder.mItemAdminProductBinding.tvPriceSale.setText(strRealPrice);
         }
-        holder.mItemAdminFoodBinding.tvFoodName.setText(products.getName());
-        holder.mItemAdminFoodBinding.tvFoodDescription.setText(products.getDescription());
+        holder.mItemAdminProductBinding.tvFoodName.setText(products.getName());
+        holder.mItemAdminProductBinding.tvFoodDescription.setText(products.getDescription());
         if (products.isPopular()) {
-            holder.mItemAdminFoodBinding.tvPopular.setText("Có");
+            holder.mItemAdminProductBinding.tvPopular.setText("Có");
         } else {
-            holder.mItemAdminFoodBinding.tvPopular.setText("Không");
+            holder.mItemAdminProductBinding.tvPopular.setText("Không");
         }
 
-        holder.mItemAdminFoodBinding.imgEdit.setOnClickListener(v -> iOnManagerProductListener.onClickUpdateProduct(products));
-        holder.mItemAdminFoodBinding.imgDelete.setOnClickListener(v -> iOnManagerProductListener.onClickDeleteProduct(products));
+        holder.mItemAdminProductBinding.imgEdit.setOnClickListener(v -> iOnManagerProductListener.onClickUpdateProduct(products));
+        holder.mItemAdminProductBinding.imgDelete.setOnClickListener(v -> iOnManagerProductListener.onClickDeleteProduct(products));
     }
 
     @Override
@@ -78,13 +78,13 @@ public class AdminProductAdapter extends RecyclerView.Adapter<AdminProductAdapte
         return null == mListProducts ? 0 : mListProducts.size();
     }
 
-    public static class AdminFoodViewHolder extends RecyclerView.ViewHolder {
+    public static class AdminProductViewHolder extends RecyclerView.ViewHolder {
 
-        private final ItemAdminProductBinding mItemAdminFoodBinding;
+        private final ItemAdminProductBinding mItemAdminProductBinding;
 
-        public AdminFoodViewHolder(ItemAdminProductBinding itemAdminFoodBinding) {
-            super(itemAdminFoodBinding.getRoot());
-            this.mItemAdminFoodBinding = itemAdminFoodBinding;
+        public AdminProductViewHolder(ItemAdminProductBinding itemAdminProductBinding) {
+            super(itemAdminProductBinding.getRoot());
+            this.mItemAdminProductBinding = itemAdminProductBinding;
         }
     }
 }

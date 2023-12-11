@@ -145,7 +145,7 @@ public class HomeFragment extends BaseFragment {
         if (getActivity() == null) {
             return;
         }
-        ControllerApplication.get(getActivity()).getFoodDatabaseReference().addValueEventListener(new ValueEventListener() {
+        ControllerApplication.get(getActivity()).getProductDatabaseReference().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 mFragmentHomeBinding.layoutContent.setVisibility(View.VISIBLE);

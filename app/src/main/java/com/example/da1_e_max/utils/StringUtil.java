@@ -22,21 +22,4 @@ public class StringUtil {
         } else return "" + number;
     }
 
-
-
-
-//public static boolean isValidName(String name) {
-//    // Example: Valid if the name contains only letters and spaces
-//    return name.matches("[a-zA-Z ]+");
-//}
-//
-//    public static boolean isValidPhoneNumber(String phoneNumber) {
-//        // Example: Valid if the phone number contains only digits and has a length between 10 and 15
-//        return phoneNumber.matches("\\d{10,15}");
-//    }
-//
-//    public static boolean isValidEmail(String email) {
-//        // Example: Valid if the email matches a simple pattern for demonstration
-//        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
-//    }
 }

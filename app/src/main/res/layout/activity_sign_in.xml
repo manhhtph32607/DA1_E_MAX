@@ -26,8 +26,8 @@
             android:id="@+id/edt_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_email"
             android:layout_marginTop="@dimen/define_dimen_20"
+            android:hint="@string/hint_email"
             android:imeOptions="actionNext"
             android:inputType="textEmailAddress"
             android:textColor="@color/textColorPrimary"
@@ -80,10 +80,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/define_dimen_10"
             android:padding="@dimen/define_dimen_10"
-            android:textSize="@dimen/text_size_small"
+            android:text="@string/forgot_password"
             android:textColor="@color/blue"
-            android:textStyle="bold"
-            android:text="@string/forgot_password"/>
+            android:textSize="@dimen/text_size_small"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

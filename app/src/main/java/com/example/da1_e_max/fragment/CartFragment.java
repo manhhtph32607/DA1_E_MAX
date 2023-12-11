@@ -60,7 +60,7 @@ public class CartFragment extends BaseFragment {
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }
-        displayListFoodInCart();
+        displayListProductInCart();
 //        String strCheck = mfragmentAccountBinding.tvEmail.getText().toString();
         String strCheck = DataStoreManager.getUser().getEmail();
         if (StringUtil.isEmpty(strCheck)){
@@ -68,7 +68,6 @@ public class CartFragment extends BaseFragment {
         }else {
             mFragmentCartBinding.tvOrderCart.setOnClickListener(v -> onClickOrderCart());
         }
-
 
         return mFragmentCartBinding.getRoot();
     }
@@ -80,14 +79,14 @@ public class CartFragment extends BaseFragment {
         }
     }
 
-    private void displayListFoodInCart() {
+    private void displayListProductInCart() {
         if (getActivity() == null) {
             return;
         }
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        mFragmentCartBinding.rcvFoodCart.setLayoutManager(linearLayoutManager);
+        mFragmentCartBinding.rcvProductCart.setLayoutManager(linearLayoutManager);
         DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
-        mFragmentCartBinding.rcvFoodCart.addItemDecoration(itemDecoration);
+        mFragmentCartBinding.rcvProductCart.addItemDecoration(itemDecoration);
 
         initDataProductCart();
     }
@@ -101,19 +100,19 @@ public class CartFragment extends BaseFragment {
 
         mCartAdapter = new CartAdapter(mListProductsCart, new CartAdapter.IClickListener() {
             @Override
-            public void clickDeteteFood(Products products, int position) {
+            public void clickDeteteProduct(Products products, int position) {
                 deleteFoodFromCart(products, position);
             }
 
             @Override
-            public void updateItemFood(Products products, int position) {
+            public void updateItemProduct(Products products, int position) {
                 ProductDatabase.getInstance(getActivity()).productDAO().updateProduct(products);
                 mCartAdapter.notifyItemChanged(position);
 
                 calculateTotalPrice();
             }
         });
-        mFragmentCartBinding.rcvFoodCart.setAdapter(mCartAdapter);
+        mFragmentCartBinding.rcvProductCart.setAdapter(mCartAdapter);
 
         calculateTotalPrice();
     }
@@ -192,7 +191,7 @@ public class CartFragment extends BaseFragment {
         TextView tvCreateOrder = viewDialog.findViewById(R.id.tv_create_order);
 
         // Set data
-        tvFoodsOrder.setText(getStringListFoodsOrder());
+        tvFoodsOrder.setText(getStringListProductsOrder());
         tvPriceOrder.setText(mFragmentCartBinding.tvTotalPrice.getText().toString());
 
         // Set listener
@@ -212,7 +211,7 @@ public class CartFragment extends BaseFragment {
                 String strEmail = DataStoreManager.getUser().getEmail();
 
                 Order order = new Order(id, strName, strEmail, strPhone, strAddress,
-                        mAmount, getStringListFoodsOrder(), Constant.TYPE_PAYMENT_CASH, false);
+                        mAmount, getStringListProductsOrder(), Constant.TYPE_PAYMENT_CASH, false);
                 ControllerApplication.get(getActivity()).getBookingDatabaseReference()
                         .child(String.valueOf(id))
                         .setValue(order, (error1, ref1) -> {
@@ -229,7 +228,7 @@ public class CartFragment extends BaseFragment {
         bottomSheetDialog.show();
     }
 
-    private String getStringListFoodsOrder() {
+    private String getStringListProductsOrder() {
         if (mListProductsCart == null || mListProductsCart.isEmpty()) {
             return "";
         }
@@ -248,7 +247,7 @@ public class CartFragment extends BaseFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(ReloadListCartEvent event) {
-        displayListFoodInCart();
+        displayListProductInCart();
     }
 
     @Override

@@ -19,9 +19,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     private final IClickListener iClickListener;
 
     public interface IClickListener {
-        void clickDeteteFood(Products products, int position);
+        void clickDeteteProduct(Products products, int position);
 
-        void updateItemFood(Products products, int position);
+        void updateItemProduct(Products products, int position);
     }
 
     public CartAdapter(List <Products> mListProducts, IClickListener iClickListener) {
@@ -66,7 +66,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             products.setCount(newCount);
             products.setTotalPrice(totalPrice);
 
-            iClickListener.updateItemFood(products, holder.getAdapterPosition());
+            iClickListener.updateItemProduct(products, holder.getAdapterPosition());
         });
 
         holder.mItemCartBinding.tvAdd.setOnClickListener(v -> {
@@ -77,11 +77,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             products.setCount(newCount);
             products.setTotalPrice(totalPrice);
 
-            iClickListener.updateItemFood(products, holder.getAdapterPosition());
+            iClickListener.updateItemProduct(products, holder.getAdapterPosition());
         });
 
         holder.mItemCartBinding.tvDelete.setOnClickListener(v
-                -> iClickListener.clickDeteteFood(products, holder.getAdapterPosition()));
+                -> iClickListener.clickDeteteProduct(products, holder.getAdapterPosition()));
     }
 
     @Override

@@ -48,7 +48,7 @@ public class AdminHomeFragment extends BaseFragment {
 
         initView();
         initListener();
-        getListFood("");
+        getListProduct("");
         return mFragmentAdminHomeBinding.getRoot();
     }
 
@@ -64,7 +64,7 @@ public class AdminHomeFragment extends BaseFragment {
             return;
         }
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        mFragmentAdminHomeBinding.rcvFood.setLayoutManager(linearLayoutManager);
+        mFragmentAdminHomeBinding.rcvProduct.setLayoutManager(linearLayoutManager);
         mListProducts = new ArrayList<>();
         mAdminProductAdapter = new AdminProductAdapter(mListProducts, new IOnManagerProductListener() {
             @Override
@@ -74,20 +74,20 @@ public class AdminHomeFragment extends BaseFragment {
 
             @Override
             public void onClickDeleteProduct(Products products) {
-                deleteFoodItem(products);
+                deleteProductItem(products);
             }
         });
-        mFragmentAdminHomeBinding.rcvFood.setAdapter(mAdminProductAdapter);
+        mFragmentAdminHomeBinding.rcvProduct.setAdapter(mAdminProductAdapter);
     }
 
     private void initListener() {
         mFragmentAdminHomeBinding.btnAddFood.setOnClickListener(v -> onClickAddFood());
 
-        mFragmentAdminHomeBinding.imgSearch.setOnClickListener(view1 -> searchFood());
+        mFragmentAdminHomeBinding.imgSearch.setOnClickListener(view1 -> searchProduct());
 
         mFragmentAdminHomeBinding.edtSearchName.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                searchFood();
+                searchProduct();
                 return true;
             }
             return false;
@@ -106,7 +106,7 @@ public class AdminHomeFragment extends BaseFragment {
             public void afterTextChanged(Editable s) {
                 String strKey = s.toString().trim();
                 if (strKey.equals("") || strKey.length() == 0) {
-                    searchFood();
+                    searchProduct();
                 }
             }
         });
@@ -122,7 +122,7 @@ public class AdminHomeFragment extends BaseFragment {
         GlobalFunction.startActivity(getActivity(), AddProductActivity.class, bundle);
     }
 
-    private void deleteFoodItem(Products products) {
+    private void deleteProductItem(Products products) {
         new AlertDialog.Builder(getActivity())
                 .setTitle(getString(R.string.msg_delete_title))
                 .setMessage(getString(R.string.msg_confirm_delete))
@@ -130,7 +130,7 @@ public class AdminHomeFragment extends BaseFragment {
                     if (getActivity() == null) {
                         return;
                     }
-                    ControllerApplication.get(getActivity()).getFoodDatabaseReference()
+                    ControllerApplication.get(getActivity()).getProductDatabaseReference()
                             .child(String.valueOf(products.getId())).removeValue((error, ref) ->
                             Toast.makeText(getActivity(),
                                     getString(R.string.msg_delete_movie_successfully), Toast.LENGTH_SHORT).show());
@@ -139,22 +139,22 @@ public class AdminHomeFragment extends BaseFragment {
                 .show();
     }
 
-    private void searchFood() {
+    private void searchProduct() {
         String strKey = mFragmentAdminHomeBinding.edtSearchName.getText().toString().trim();
         if (mListProducts != null) {
             mListProducts.clear();
         } else {
             mListProducts = new ArrayList<>();
         }
-        getListFood(strKey);
+        getListProduct(strKey);
         GlobalFunction.hideSoftKeyboard(getActivity());
     }
 
-    public void getListFood(String keyword) {
+    public void getListProduct(String keyword) {
         if (getActivity() == null) {
             return;
         }
-        ControllerApplication.get(getActivity()).getFoodDatabaseReference()
+        ControllerApplication.get(getActivity()).getProductDatabaseReference()
                 .addChildEventListener(new ChildEventListener() {
                     @SuppressLint("NotifyDataSetChanged")
                     @Override
